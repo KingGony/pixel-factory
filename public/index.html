@@ -1,43 +1,160 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="title" content="Pixel Factory (픽셀팩토리)" />
+    <meta name="twitter:title" content="Pixel Factory (픽셀팩토리)" />
+    <meta name="description" content="Welcome To The World Of Pixel Factory NFT!">
+    <meta name="twitter:description" content="Introduce to Pixel Factory' NFT series" />
+    <meta name="keywords" content="pixcat, pixcatNFT, pixtoryNFT, pixelFactoryNFT, klaytnNFT, klaymint, NFTmarket, 픽스캣, 픽스캣NFT, 픽셀팩토리NFT, 클레이튼NFT, 클레이민트, NFT마켓">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="minimum-scale=1.0, width=device-width, maximum-scale=1, user-scalable=no" name="viewport" />
+    <meta property="og:url" content="https://www.pixelfactory.kr" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Pixel Factory (픽셀팩토리)" />
+    <meta property="og:description" content="Introduce to Pixel Factory' NFT series">
+    <meta property="og:image" content="img/ogimg.png" />
+
+    <link rel="stylesheet" href="css/pix_cat.css" media="all">
+    <link rel="stylesheet" href="css/pix_cat1200.css" media="screen and (min-width: 1200px)">
+    <link rel="stylesheet" href="css/pix_cat768.css" media="screen and (min-width: 576px) and (max-width:1199px)">
+    <link rel="stylesheet" href="css/pix_cat576.css" media="screen and (min-width: 0px) and (max-width: 575px)">
+    <title>Pixel Factory</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <script>
+      function optimizeAnimation(callback) {
+        let ticking = false;
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        return () => {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(() => {
+                    callback();
+                    ticking = false;
+                });
+            }
+        };
+      }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      $(function() {
+          var i = 0;
+          $(".icon").on("click", function() {
+              $("#nav-mobile").find("a").not(".icon").slideDown(500);
+              $("header").addClass("change");
+              if (i % 2 == 0) {
+                  $("#nav-mobile").find("a").not(".icon").slideDown(500);
+              } else {
+                  $("#nav-mobile").find("a").not(".icon").slideUp(500);
+                  $("header").removeClass("change");
+              }
+              i++;
+          });
+          $(".rw").on("click", function() {
+              $("#nav-mobile").find("a").not(".icon").slideUp(500);
+              $("header").removeClass("change");
+              i++;
+          });
+
+
+          $("a").on("click", function(e) {
+              e.preventDefault(e); //기본동작 (a태그의 기본동작인 링크기능)을 취소한다.
+
+              var hash = $(this).attr("href");
+              var pos = $(hash).offset().top;
+              $("html").animate({
+                  scrollTop: pos
+              }, 800, "swing"); //swing,linear 로 가속도 조절
+          });
+
+          $('.linkurl').find("a").unbind();
+      });
+
+      function simpleParallax() {
+          // 스크롤된 거리
+          var scrolled = $(window).scrollTop() + 2;
+
+          // 백그라운드 스크롤 속도 변경
+          $('.scroll').css('background-position', '0%' + (scrolled * 0.3) + 'px');
+      }
+
+      window.addEventListener(
+          "scroll",
+          optimizeAnimation(()=>{
+              simpleParallax();
+
+              var pos = $(window).scrollTop();
+              //윈도우의 스크롤 길이가 30px이상이면 헤더에 st클래스를 붙이고 아니면 제거한다.
+              $("header")[1 >= pos ? "removeClass" : "addClass"]("st1");
+              $("header")[1 >= pos ? "addClass" : "removeClass"]("st2");
+
+              $('.roadimg').each(function(i) {
+                  var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+                  var bottom_of_window = $(window).scrollTop() + $(window).height();
+
+                  if (bottom_of_window > bottom_of_element) {
+                      $(this).animate({
+                          'opacity': '1'
+                      }, 1000);
+                  }
+              })
+          }),
+          {passive: true}
+      );
+
+      var image = new Array()
+      image[0]="img/home/396.png";
+      image[1]="img/home/404.png";
+      image[2]="img/home/475.png";
+      image[3]="img/home/500.png";
+      image[4]="img/home/544.png";
+      image[5]="img/home/553.png";
+      image[6]="img/home/562.png";
+      image[7]="img/home/574.png";
+      image[8]="img/home/604.png";
+      image[9]="img/home/1004.png";
+      image[10]="img/home/1022.png";
+      image[11]="img/home/1111.png";
+      image[12]="img/home/1185.png";
+      image[13]="img/home/1219.png";
+      image[14]="img/home/1377.png";
+      image[15]="img/home/2009.png";
+      image[16]="img/home/2017.png";
+      image[17]="img/home/2093.png";
+      image[18]="img/home/2174.png";
+      image[19]="img/home/2193.png";
+      image[20]="img/home/2194.png";
+      image[21]="img/home/3039.png";
+      image[22]="img/home/3041.png";
+      image[23]="img/home/3045.png";
+      image[24]="img/home/3114.png";
+      image[25]="img/home/3126.png";
+      image[26]="img/home/3171.png";
+      image[27]="img/home/3179.png";
+      image[28]="img/home/cat_king.png";
+
+      var index;
+      var tmp;
+      function roll(){
+          if(index!=null){
+              tmp = index;
+          }
+          index = Math.floor(Math.random()*(image.length))
+          if(tmp!=null){
+              while(tmp==index){
+                  index = Math.floor(Math.random()*(image.length))
+              }
+          }
+          $('.frame img').attr("src",image[index]);
+      }
+    </script>
   </body>
 </html>
