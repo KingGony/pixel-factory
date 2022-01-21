@@ -184,6 +184,12 @@ class App extends Component {
         }
         $('.frame img').attr("src",image[index]);
     })
+
+    $('#reroll_button').hover(function(){
+        $(this).attr("src",button2);
+    },function(){
+        $(this).attr("src",button1);
+    })
   }
   render(){
     return (

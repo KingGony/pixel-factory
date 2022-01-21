@@ -17,7 +17,6 @@
     #nav-pc {
         width: 450px;
         margin: auto;
-        /*border: 1px solid;*/
     }
     
     a.icon {
@@ -172,8 +171,8 @@
     
 }
 
-/* 768px */
-@media only screen and (min-width:576px){
+/* 768px ************************************************************************/
+@media only screen and (min-width:576px) and (max-width:1199px){
     
     
     .scroll{
@@ -325,7 +324,7 @@
     
 }
 
-/* 576px */
+/* 576px ********************************************************************/
 @media only screen and (max-width:575px){
     
 .scroll{
